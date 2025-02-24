@@ -103,13 +103,19 @@ function buy(id) {
 // Exercise 2
 function cleanCart() {
     cart.length = 0;
+    total = 0;
     console.log(cart)
+
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
-
+    for(let i = 0; i < cart.length; i++){
+        total += cart[i].price * cart[i].quantity;
+    }
+    console.log(total)
+    return total;
 }
 
 // Exercise 4
