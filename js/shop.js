@@ -168,7 +168,12 @@ function printCart() {
             <td>${item.name}</td>
             <td>${item.price}</td>
             <td>${item.quantity}</td>
-            <td>${itemTotal}</td>
+            <td>${itemTotal.toFixed(2)}</td>
+            <td>
+                <button onclick="removeFromCart(${item.id})" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i> Remove
+                </button>
+            </td>
         `;
 
         cartList.appendChild(row);
@@ -182,12 +187,24 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-    for(let i = 0; i < cart.length; i++){
-        if(cart[i].id === id){
-            cart.splice(i, 1);
-            break;
+    if(confirm('Are you sure you want to remove this item from the cart?')){
+        for(let i = 0; i < cart.length; i++){
+            if(cart[i].id === id){
+                if(cart[i].quantity > 1){
+                    cart[i].quantity--;
+                } else {
+                cart.splice(i, 1);
+                break;
+                }
+            }
         }
     }
+
+    const countProduct = document.getElementById('count_product');
+    countProduct.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    printCart();
+
 }
 
 function open_modal() {
