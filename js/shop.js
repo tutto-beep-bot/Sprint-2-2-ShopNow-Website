@@ -78,6 +78,8 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+    const countProduct= document.getElementById('count_product');   
+    
     let found = false;
 
     for(let z = 0; z < cart.length; z++){
@@ -97,6 +99,8 @@ function buy(id) {
             }
         }
     }
+
+    countProduct.textContent = cart.reduce((total, item) => total + item.quantity, 0);
     console.log(cart)
 }
 
@@ -104,6 +108,15 @@ function buy(id) {
 function cleanCart() {
     cart.length = 0;
     total = 0;
+    const countProduct= document.getElementById('count_product');
+    countProduct.textContent = "0";
+    
+    const cartList = document.getElementById('cart_list')
+    cartList.innerHTML = '';
+
+    const totalPrice = document.getElementById('total_price')
+    totalPrice.innerHTML = '0.00';
+    
     console.log(cart)
 }
 
@@ -169,7 +182,12 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-
+    for(let i = 0; i < cart.length; i++){
+        if(cart[i].id === id){
+            cart.splice(i, 1);
+            break;
+        }
+    }
 }
 
 function open_modal() {
