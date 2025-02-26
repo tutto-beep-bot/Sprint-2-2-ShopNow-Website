@@ -110,34 +110,58 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    applyPromotionsCart();
     let total = 0;
     for(let i = 0; i < cart.length; i++){
         total += cart[i].price * cart[i].quantity;
     }
     console.log(`The total price is: ${total}`)
-    applyPromotionsCart();
     return total;
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
-    let subtotalWithDiscount = 0;
+    // let subtotalWithDiscount = 0;
     for(let i = 0; i < cart.length; i++){
         if(cart[i].offer && cart[i].quantity >= cart[i].offer.number){
             let discount = cart[i].price * cart[i].quantity * (cart[i].offer.percent / 100);
-            subtotalWithDiscount += cart[i].price * cart[i].quantity - discount;
+            cart[i].subtotalWithDiscount = cart[i].price * cart[i].quantity - discount;
+        } else {
+            cart[i].subtotalWithDiscount = cart[i].price * cart[i].quantity;
         }
     }
-
-    console.log(`The subtotal with discount is: ${subtotalWithDiscount}`)
-    return subtotalWithDiscount;
 }
 
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    
+    const cartList = document.getElementById('cart_list')
+
+    let totalPrice = document.getElementById('total_price')
+
+    cartList.innerHTML = '';
+
+    let total = 0;
+
+    applyPromotionsCart();
+
+    cart.forEach(item => {
+        let itemTotal = item.subtotalWithDiscount || item.price * item.quantity;
+        total += itemTotal; 
+
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>${itemTotal}</td>
+        `;
+
+        cartList.appendChild(row);
+    })
+
+    totalPrice.innerHTML = total.toFixed(2);
 }
 
 
