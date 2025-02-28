@@ -171,7 +171,7 @@ function printCart() {
             <td>${itemTotal.toFixed(2)}</td>
             <td>
                 <button onclick="removeFromCart(${item.id})" class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i> Remove
+                    <i class="fas fa-trash"></i>
                 </button>
             </td>
         `;
