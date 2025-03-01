@@ -32,7 +32,7 @@ Follow these steps to install and set up the project in your local environment:
 
 Clone the repository (or download the ZIP file):
 
-git clone https://github.com/your-username/shopnow.git
+git clone https://github.com/tutto-beep-bot/Sprint-2-2-ShopNow-Website.git
 
 Navigate to the project directory:
 
